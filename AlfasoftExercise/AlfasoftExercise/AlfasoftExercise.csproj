@@ -140,6 +140,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="DatabaseConfiguration\AlfasoftDBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -149,6 +150,7 @@
     <Compile Include="StateModals\IStateModalsConverter.cs" />
     <Compile Include="StateModals\UserStateModals.cs" />
     <Compile Include="Stores\UserStore.cs" />
+    <Compile Include="Utils\ResourceStrings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -161,6 +163,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\AJAXLoader.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -193,6 +196,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\View\Add.cshtml" />
+    <Content Include="Views\View\Remove.cshtml" />
+    <Content Include="Views\View\List.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

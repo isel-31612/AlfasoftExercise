@@ -1,0 +1,21 @@
+﻿@model IEnumerable<AlfasoftExercise.StateModals.UserListStateModal>
+
+@{
+    ViewBag.Title = "List";
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/AJAXLoader.js")"></script>
+}
+
+
+<h2>List</h2>
+
+<p>
+    <button onclick="LoadUserList($('table[name=mainTable]'), $('blockquote[name=mainQuote]'))">Load List</button>
+
+</p>
+<table class="table" name="mainTable">
+   
+</table>

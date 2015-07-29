@@ -1,4 +1,5 @@
 using AlfasoftExercise.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace AlfasoftExercise.StateModals
         {
             usersStateModal = users.Select(u => new UserStateModal(u));
         }
+        [JsonProperty("Users")]
         public IEnumerable<UserStateModal> usersStateModal;
 	}
 	

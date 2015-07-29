@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
-using AlfasoftExercise.DatabaseConfiguration;
-using AlfasoftExercise.Models;
 using AlfasoftExercise.Store;
 using AlfasoftExercise.StateModals;
+using AlfasoftExercise.Utils;
 
 namespace AlfasoftExercise.Controllers
 {
     public class UsersController : ApiController
     {
-
-        [Route("api/users", Name = "GetUsersList")]
-        [ResponseType(typeof(UserListStateModal))]
+        //API
+        [Route(ResourceStrings.UserList, Name = "GetUsersList")]
         public HttpResponseMessage GetUsers()
         {
             var store = UserStore.getInstance();
@@ -28,21 +19,7 @@ namespace AlfasoftExercise.Controllers
             return Request.CreateResponse(stateModal);
         }
 
-        [Route("api/users/{id}", Name = "GetUsersById")]
-        [ResponseType(typeof(User))]
-        public HttpResponseMessage GetUser(int id)
-        {
-            var store = UserStore.getInstance();
-            var user = store.GetById(id);
-            if (user == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-            var stateModal = new UserStateModal(user);
-            return Request.CreateResponse(stateModal);
-        }
-
-        [Route("api/users/new", Name = "PostAddUserByName")]
+        [Route(ResourceStrings.AddUser, Name = "PostAddUserByName")]
         public HttpResponseMessage AddUser(NewUserStateModal newUser)
         {
             if (!ModelState.IsValid)
@@ -51,21 +28,21 @@ namespace AlfasoftExercise.Controllers
             }
 
             var store = UserStore.getInstance();
-            var result = store.AddUser(newUser);
+            var user = store.AddUser(newUser);
 
-            if (result)
-                return Request.CreateResponse(HttpStatusCode.NoContent);
+            if (user!=null)
+                return Request.CreateResponse(new UserStateModal(user));
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
         [HttpPost]
-        [Route("api/users/delete", Name = "PostRemoveUserByName")]
+        [Route(ResourceStrings.RemoveUser, Name = "PostRemoveUserByName")]
         public HttpResponseMessage RemoveUser(RemoveUserStateModal removeUser)
         {
             var store = UserStore.getInstance();
-            var result = store.RemoveUser(removeUser);
-            if (result)
-                return Request.CreateResponse(HttpStatusCode.NoContent);
+            var user = store.RemoveUser(removeUser);
+            if (user != null)
+                return Request.CreateResponse(new UserStateModal(user));
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
     }

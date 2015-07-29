@@ -19,8 +19,11 @@ namespace AlfasoftExercise.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int InternalId { get; set; }
         [Required]
+        [Index(IsUnique =true)]
         public int Number { get; set; }
         [Required]
+        [Index(IsUnique = true)]
+        [StringLength(200)]
         public String Name { get; set; }
         [Required]
         public String Password { get; set; }

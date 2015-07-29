@@ -26,14 +26,7 @@ namespace AlfasoftExercise.Store
             }
 		}
 
-		public User GetById(int userId)
-		{
-			using(var ctx = new AlfasoftDBContext()){
-				return ctx.Users.SingleOrDefault(u=>u.Number == userId);
-			}
-		}
-
-		public bool AddUser(NewUserStateModal newUser)
+		public User AddUser(NewUserStateModal newUser)
 		{
 			using(var ctx = new AlfasoftDBContext()){
 				if(!ctx.Users.Any(u => u.Name.Equals(newUser.Name) || u.Number == newUser.Id)){
@@ -41,22 +34,22 @@ namespace AlfasoftExercise.Store
 						
 					ctx.Users.Add(user);
                     ctx.SaveChanges();
-					return true;
+					return user;
 				}
 			}
-			return false;
+			return null;
 		}
 		
-		public bool RemoveUser(RemoveUserStateModal removeUser)
+		public User RemoveUser(RemoveUserStateModal removeUser)
 		{
 			using(var ctx = new AlfasoftDBContext()){
                 User user = ctx.Users.SingleOrDefault(u => u.Name.Equals(removeUser.Name));
 				if(user!=null){
 					ctx.Users.Remove(user);
                     ctx.SaveChanges();
-                    return true;
+                    return user;
 				}
-				return false;
+				return null;
 			}
 		}
 	}
