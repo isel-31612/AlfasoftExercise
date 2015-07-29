@@ -13,11 +13,14 @@ Trial Project for work interview in Alfasoft Company. Objective was to create a 
   * In case of a fail, the response **MUST** be a Bad Request (400)
 * Remove a user only if exists one with supplied name
   * In case of a fail, the response **MUST** be a Bad Request (400)
-* For testing purposes, there should be 3 views:
+* For testing purposes, there should be 3 views:**(See below)**
   * Add View with input for identification, name and password
   * Remove View with input for name
   * List View with iddentification, name and password fields
 
+## Missing Views
+
+Unfortunatly due to Same-origin policy I am unable to provide Views with requests to another webpages. Still thinking on that problem.
 
 ## Run Locally
 1. Download Zip file [HERE](https://github.com/isel-31612/AlfasoftExercise/archive/master.zip) OR clone from this repository
@@ -26,7 +29,12 @@ Trial Project for work interview in Alfasoft Company. Objective was to create a 
 
 ## Deploying
 
-1. Project is deployed in AppHarbor
-2. Access it [HERE] (http://alfasoftexercise.apphb.com/)
+* Project is deployed in AppHarbor and can be access in the following end-points:
+ 1. [List] (http://alfasoftexercise.apphb.com/api/users)
+ 2. [Add] (http://alfasoftexercise.apphb.com/api/users/new)
+ 3. [Remove] (http://alfasoftexercise.apphb.com/api/users/delete)
+ 
+ *EDIT:* Still having some struggles with the deploy
+
 
 Note: It may take up to 5 minutes for the application to load initially (due to project inactivity)
