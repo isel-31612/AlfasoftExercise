@@ -1,4 +1,9 @@
+using AlfasoftExercise.DatabaseConfiguration;
+using AlfasoftExercise.Models;
+using AlfasoftExercise.StateModals;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AlfasoftExercise.Store
 {
@@ -6,20 +11,19 @@ namespace AlfasoftExercise.Store
 	{
 		private UserStore(){}
 		
-		private UserStore getInstance(){
+		public static UserStore getInstance(){
 			return new UserStore();
 		}
 		
 		public IEnumerable<User> GetAll(int page = 1, int size = 10)
 		{
-			IEnumerable<User> users = null;
 			using(var ctx = new AlfasoftDBContext()){
-				users = ctx.Users;//Check if object doesnt need a "get"
-			}
-				
-			return users
-					.Skip(size * (page - 1))
-					.Take(size);
+                return ctx.Set<User>()
+                    .OrderBy(u=>u.Name)
+                    .Skip((page-1) * (size))
+                    .Take(size)
+                    .ToList();
+            }
 		}
 
 		public User GetById(int userId)
@@ -32,23 +36,25 @@ namespace AlfasoftExercise.Store
 		public bool AddUser(NewUserStateModal newUser)
 		{
 			using(var ctx = new AlfasoftDBContext()){
-				if(!Name.exists && !ID.exists){
+				if(!ctx.Users.Any(u => u.Name.Equals(newUser.Name) || u.Number == newUser.Id)){
 					var user = newUser.getModel();
 						
 					ctx.Users.Add(user);
+                    ctx.SaveChanges();
 					return true;
 				}
 			}
 			return false;
 		}
 		
-		public bool RemoveUser(String name)
+		public bool RemoveUser(RemoveUserStateModal removeUser)
 		{
 			using(var ctx = new AlfasoftDBContext()){
-				User user = ctx.Users.SingleOrDefault(u=>u.Name.equals(name))
+                User user = ctx.Users.SingleOrDefault(u => u.Name.Equals(removeUser.Name));
 				if(user!=null){
 					ctx.Users.Remove(user);
-					return true;
+                    ctx.SaveChanges();
+                    return true;
 				}
 				return false;
 			}

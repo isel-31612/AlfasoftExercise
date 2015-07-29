@@ -1,3 +1,4 @@
+using AlfasoftExercise.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,14 @@ namespace AlfasoftExercise.StateModals
 	//Response of a User Representation
 	public class UserStateModal
 	{
-		public int Id;
+        public UserStateModal(User user)
+        {
+            Id = user.Number;
+            Name = user.Name;
+            Password = user.Password;
+        }
+
+        public int Id;
 		public String Name;
 		public String Password;
 	}
@@ -16,18 +24,29 @@ namespace AlfasoftExercise.StateModals
 	//Response of a List of Users
 	public class UserListStateModal
 	{
-		public IEnumerable<UserStateModal> users;0
+        public UserListStateModal(IEnumerable<User> users)
+        {
+            usersStateModal = users.Select(u => new UserStateModal(u));
+        }
+        public IEnumerable<UserStateModal> usersStateModal;
 	}
 	
 	//Client input of a new User
 	public class NewUserStateModal : IStateModalsConverter<User>
 	{
-		public int Id;
-		public String Name;
-		public String Password;
-		
-		public User getModel(){
+        public NewUserStateModal(){}
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String Password { get; set; }
+
+        public User getModel(){
 			return new User(Id,Name,Password);
 		}
 	}
+
+    public class RemoveUserStateModal
+    {
+        public RemoveUserStateModal() { }
+        public String Name { get; set; }
+    }
 }
