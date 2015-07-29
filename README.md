@@ -7,11 +7,12 @@ Trial Project for work interview in Alfasoft Company. Objective was to create a 
 ##Constraints
 
 * Should be able to store user's identification, name and password.
-* Business logic MUST be in the controller
+* Business logic **MUST** be in the controller
+* Controller should be create using option **Web API 2 Controller With Actions, using Entity Framework**
 * Add a user only if there's none with supplied name or identification
-  * In case of a fail, the response MUST be a Bad Request (400)
+  * In case of a fail, the response **MUST** be a Bad Request (400)
 * Remove a user only if exists one with supplied name
-  * In case of a fail, the response MUST be a Bad Request (400)
+  * In case of a fail, the response **MUST** be a Bad Request (400)
 * For testing purposes, there should be 3 views:
   * Add View with input for identification, name and password
   * Remove View with input for name
