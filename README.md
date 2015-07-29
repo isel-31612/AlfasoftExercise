@@ -20,7 +20,7 @@ Trial Project for work interview in Alfasoft Company. Objective was to create a 
 
 ## Run Locally
 1. Download Zip file [HERE](https://github.com/isel-31612/AlfasoftExercise/archive/master.zip) OR clone from this repository
-2. Double-click on AlfasoftExercise.sln to start Visual Studio OR Add it with the File > Import Project
+2. Double-click on AlfasoftExercise.sln to start Visual Studio OR Add it with the File > Open > Project/Solution (Ctrl+Shift+O)
 3. Hit Run/Debug
 
 ## Deploying
